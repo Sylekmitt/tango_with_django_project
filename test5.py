@@ -7,6 +7,7 @@
 # Last updated: October 3rd, 2019
 # Revising Author: David Maxwell
 # 
+
 #
 # In order to run these tests, copy this module to your tango_with_django_project/rango/ directory.
 # Once this is complete, run $ python manage.py test rango.tests_chapter5
@@ -15,6 +16,7 @@
 # 
 # Once you are done with the tests, delete the module. You don't need to put it in your Git repository!
 #
+
 import os
 import warnings
 import importlib
@@ -23,8 +25,11 @@ from django.urls import reverse
 from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth.models import User
+
 FAILURE_HEADER = f"{os.linesep}{os.linesep}{os.linesep}================{os.linesep}TwD TEST FAILURE =({os.linesep}================{os.linesep}"
 FAILURE_FOOTER = f"{os.linesep}"
+
+
 class Chapter5DatabaseConfigurationTests(TestCase):
     """
     Is your database configured as the book states?
@@ -71,6 +76,8 @@ class Chapter5DatabaseConfigurationTests(TestCase):
                 self.assertTrue(self.does_gitignore_include_database(gitignore_path), f"{FAILURE_HEADER}Your .gitignore file does not include 'db.sqlite3' -- you should exclude the database binary file from all commits to your Git repository.{FAILURE_FOOTER}")
             else:
                 warnings.warn("You don't appear to have a .gitignore file in place in your repository. We ask that you consider this! Read the Don't git push your Database paragraph in Chapter 5.")
+
+
 class Chapter5ModelTests(TestCase):
     """
     Are the models set up correctly, and do all the required attributes (post exercises) exist?
@@ -118,6 +125,8 @@ class Chapter5ModelTests(TestCase):
         
         self.assertEqual(str(category_py), 'Python', f"{FAILURE_HEADER}The __str__() method in the Category class has not been implemented according to the specification given in the book.{FAILURE_FOOTER}")
         self.assertEqual(str(page), 'Tango with Django', f"{FAILURE_HEADER}The __str__() method in the Page class has not been implemented according to the specification given in the book.{FAILURE_FOOTER}")
+
+
 class Chapter5AdminInterfaceTests(TestCase):
     """
     A series of tests that examines the authentication functionality (for superuser creation and logging in), and admin interface changes.
@@ -167,6 +176,8 @@ class Chapter5AdminInterfaceTests(TestCase):
         # Is the TestPage1 page present, and in order?
         expected_str = '<tr class="row1"><td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td><th class="field-title"><a href="/admin/rango/page/1/change/">TestPage1</a></th><td class="field-category nowrap">TestCategory</td><td class="field-url">https://www.google.com</td></tr>'
         self.assertTrue(expected_str in response_body, f"{FAILURE_HEADER}We couldn't find the correct output in the Page view within the admin interface for page listings. Did you complete the exercises, adding extra columns to the admin view for this model? Are the columns in the correct order?{FAILURE_FOOTER}")
+
+
 class Chapter5PopulationScriptTests(TestCase):
     """
     Tests whether the population script puts the expected data into a test database.
