@@ -23,9 +23,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('', views.about, name='about' ),
     path('rango/', include('rango.urls')),
-    path('about/', views.about, name='about'),
+    # The above maps any URLs starting with rango/ to be handled by rango.
     path('admin/', admin.site.urls),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 
